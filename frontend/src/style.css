@@ -1,1 +1,66 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800&display=swap");
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+@layer components {
+  .btn-primary {
+    @apply w-full text-white font-bold py-3 px-4 rounded-full transition duration-200 shadow-md transform;
+    background-color: #13c1ac;
+  }
+  .btn-primary:hover {
+    @apply shadow-lg -translate-y-0.5;
+    background-color: #14b39e;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 outline-none transition-all bg-gray-50;
+  }
+  .input-field:focus {
+    @apply border-gray-400 ring-2 bg-white;
+    border-color: #13c1ac;
+    ring-color: rgba(19, 193, 172, 0.2);
+  }
+
+  .card-container {
+    @apply bg-white p-8 rounded-3xl shadow-lg border border-gray-100;
+  }
+
+  .text-wallaclone {
+    color: #13c1ac;
+  }
+
+  .border-wallaclone {
+    border-color: #13c1ac;
+  }
+
+  .ad-card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-200 cursor-pointer;
+  }
+
+  .ad-card:hover {
+    @apply shadow-lg -translate-y-1;
+  }
+
+  .ad-image {
+    @apply w-full h-48 object-cover bg-gray-200;
+  }
+
+  .badge-sell {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-semibold;
+    background-color: #13c1ac;
+    color: white;
+  }
+
+  .badge-buy {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-semibold bg-orange-500 text-white;
+  }
+
+  .logo-title {
+    font-family: "Outfit", sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+}
