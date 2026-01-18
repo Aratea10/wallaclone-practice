@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wallaclone - Anuncios</title>
+  <link rel="stylesheet" href="./src/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+  <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="/" class="text-3xl font-bold text-gray-800 logo-title hover:opacity-80 transition-opacity">Wallaclone</a>
+      <div id="auth-buttons" class="flex gap-3"></div>
+    </div>
+  </header>
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="mb-8 space-y-4">
+      <div class="flex flex-col md:flex-row gap-4 md:items-center">
+        <div class="flex-1">
+          <input type="text" id="search-input" placeholder="¿Qué estás buscando?" class="input-field w-full" />
+        </div>
+        <div class="flex gap-2 overflow-x-auto pb-2 md:pb-0" id="tags-filter"></div>
+      </div>
+    </div>
+
+    <div id="loading-state" class="text-center py-20 hidden">
+      <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      <p class="mt-4 text-gray-600">Cargando anuncios...</p>
+    </div>
+    <div id="error-state" class="text-center py-20 hidden">
+      <p class="text-red-500 text-lg" id="error-text"></p>
+      <button onclick="location.reload()" class="mt-4 px-6 py-2 bg-gray-800 text-white rounded-full hover:bg-gray-700">
+        Reintentar
+      </button>
+    </div>
+    <div id="empty-state" class="text-center py-20 hidden">
+      <p class="text-gray-500 text-lg">No hay anuncios disponibles</p>
+      <p class="text-gray-400 mt-2">¡Sé el primero en publicar!</p>
+    </div>
+    <div id="ads-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6"></div>
+
+    <div id="pagination" class="mt-12 justify-center gap-4 hidden">
+      <button id="prev-page"
+        class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+        Anterior
+      </button>
+      <span id="current-page" class="px-4 py-2 text-gray-600 font-medium">Página 1</span>
+      <button id="next-page"
+        class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+        Siguiente
+      </button>
+    </div>
+  </main>
+  <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>
