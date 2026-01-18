@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle - Wallaclone</title>
+    <link rel="stylesheet" href="./src/style.css" />
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+        <div class="px-4 py-4 flex justify-between items-center">
+            <a href="/" class="text-3xl font-bold text-gray-800 hover:opacity-80 logo-title">Wallaclone</a>
+        </div>
+    </header>
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div id="loading-state" class="text-center py-20">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+            <p class="mt-4 text-gray-600">Cargando anuncio...</p>
+        </div>
+        <div id="error-state" class="text-center py-20 hidden">
+            <p class="text-red-500 text-lg" id="error-text"></p>
+            <a href="/" class="mt-4 inline-block px-6 py-2 bg-gray-800 text-white rounded-full hover:bg-gray-700">
+                Volver al listado
+            </a>
+        </div>
+        <div id="empty-state" class="text-center py-20 hidden">
+            <p class="text-gray-500 text-lg">Este anuncio no existe</p>
+            <a href="/" class="mt-4 inline-block px-6 py-2 bg-gray-800 text-white rounded-full hover:bg-gray-700">
+                Volver al listado
+            </a>
+        </div>
+        <div id="ad-detail" class="hidden">
+            <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+                <div id="ad-image-container"></div>
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h1 id="ad-name" class="text-3xl font-bold text-gray-800 mb-2"></h1>
+                            <span id="ad-type-badge"></span>
+                        </div>
+                        <p id="ad-price" class="text-4xl font-bold" style="color: #13c1ac"></p>
+                    </div>
+                    <p id="ad-description" class="text-gray-600 text-lg leading-relaxed"></p>
+                    <div id="owner-actions" class="mt-8 pt-8 border-t border-gray-200 hidden gap-4">
+                        <button id="edit-btn"
+                            class="px-6 py-3 bg-gray-200 text-gray-800 rounded-full font-semibold hover:bg-gray-300">
+                            Editar anuncio
+                        </button>
+                        <button id="delete-btn"
+                            class="px-6 py-3 bg-red-500 text-white rounded-full font-semibold hover:bg-red-600">
+                            Eliminar anuncio
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="module" src="./src/detail.js"></script>
+</body>
+
+</html>
