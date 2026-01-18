@@ -1,142 +1,148 @@
 {
-    "adverts": [
-        {
-            "id": 1,
-            "name": "iPhone 13 Pro",
-            "description": "128GB, color azul, buen estado. Incluye cargador y caja original.",
-            "price": 650,
-            "type": "sell",
-            "photo": "",
-            "owner": "usuario1",
-            "tags": [
-                "movil",
-                "trabajo"
-            ]
-        },
-        {
-            "id": 2,
-            "name": "Busco Nintendo Switch",
-            "description": "Busco Nintendo Switch en buen estado, preferiblemente con juegos.",
-            "price": 200,
-            "type": "buy",
-            "photo": "",
-            "owner": "usuario2",
-            "tags": [
-                "ocio"
-            ]
-        },
-        {
-            "id": 3,
-            "name": "Bicicleta de montaña",
-            "description": "Bicicleta Trek X-Caliber, talla M, poco uso. Cambios Shimano.",
-            "price": 450,
-            "type": "sell",
-            "photo": "",
-            "owner": "usuario1",
-            "tags": [
-                "ocio",
-                "motor"
-            ]
-        },
-        {
-            "id": 4,
-            "name": "MacBook Air M1",
-            "description": "8GB RAM, 256GB SSD. Como nuevo, solo 6 meses de uso.",
-            "price": 850,
-            "type": "sell",
-            "photo": "",
-            "owner": "usuario3",
-            "tags": [
-                "trabajo",
-                "movil"
-            ]
-        },
-        {
-            "id": 5,
-            "name": "Busco PlayStation 5",
-            "description": "Busco PS5 nueva o seminueva. Pago hasta 500€.",
-            "price": 500,
-            "type": "buy",
-            "photo": "",
-            "owner": "usuario2",
-            "tags": [
-                "ocio"
-            ]
-        },
-        {
-            "id": 6,
-            "name": "Mesa de oficina IKEA",
-            "description": "Mesa escritorio blanca 120x60cm. Perfecto estado.",
-            "price": 45,
-            "type": "sell",
-            "photo": "",
-            "owner": "usuario4",
-            "tags": [
-                "trabajo",
-                "ocio"
-            ]
-        },
-        {
-            "id": 7,
-            "name": "Auriculares Sony WH-1000XM4",
-            "description": "Cancelación de ruido, Bluetooth. Con estuche original.",
-            "price": 180,
-            "type": "sell",
-            "photo": "",
-            "owner": "usuario3",
-            "tags": [
-                "movil",
-                "ocio"
-            ]
-        },
-        {
-            "id": 8,
-            "name": "Busco coche pequeño",
-            "description": "Busco coche urbano, gasolina o híbrido. Máximo 10 años.",
-            "price": 8000,
-            "type": "buy",
-            "photo": "",
-            "owner": "usuario1",
-            "tags": [
-                "motor"
-            ]
-        },
-        {
-            "id": 9,
-            "name": "Teclado Mecánico Keychron",
-            "description": "Teclado K2 v2, switches brown. RGB. En caja.",
-            "price": 80,
-            "type": "sell",
-            "photo": "",
-            "owner": "usuario3",
-            "tags": [
-                "trabajo"
-            ]
-        },
-        {
-            "id": 10,
-            "name": "Monitor Dell 27 4K",
-            "description": "Monitor USB-C, perfecto para Mac. Sin pixeles muertos.",
-            "price": 350,
-            "type": "sell",
-            "photo": "",
-            "owner": "usuario4",
-            "tags": [
-                "trabajo"
-            ]
-        },
-        {
-            "id": 11,
-            "name": "iPad Air 4",
-            "description": "64GB, Sky Blue. Con Apple Pencil 2.",
-            "price": 400,
-            "type": "sell",
-            "owner": "usuario1",
-            "tags": [
-                "trabajo",
-                "movil"
-            ]
-        }
-    ],
-    "users": []
+  "adverts": [
+    {
+      "id": 1,
+      "name": "iPhone 13 Pro",
+      "description": "128GB, color azul, buen estado. Incluye cargador y caja original.",
+      "price": 650,
+      "type": "sell",
+      "photo": "",
+      "owner": "usuario1",
+      "tags": [
+        "movil",
+        "trabajo"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Busco Nintendo Switch",
+      "description": "Busco Nintendo Switch en buen estado, preferiblemente con juegos.",
+      "price": 200,
+      "type": "buy",
+      "photo": "",
+      "owner": "usuario2",
+      "tags": [
+        "ocio"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Bicicleta de montaña",
+      "description": "Bicicleta Trek X-Caliber, talla M, poco uso. Cambios Shimano.",
+      "price": 450,
+      "type": "sell",
+      "photo": "",
+      "owner": "usuario1",
+      "tags": [
+        "ocio",
+        "motor"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "MacBook Air M1",
+      "description": "8GB RAM, 256GB SSD. Como nuevo, solo 6 meses de uso.",
+      "price": 850,
+      "type": "sell",
+      "photo": "",
+      "owner": "usuario3",
+      "tags": [
+        "trabajo",
+        "movil"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Busco PlayStation 5",
+      "description": "Busco PS5 nueva o seminueva. Pago hasta 500€.",
+      "price": 500,
+      "type": "buy",
+      "photo": "",
+      "owner": "usuario2",
+      "tags": [
+        "ocio"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Mesa de oficina IKEA",
+      "description": "Mesa escritorio blanca 120x60cm. Perfecto estado.",
+      "price": 45,
+      "type": "sell",
+      "photo": "",
+      "owner": "usuario4",
+      "tags": [
+        "trabajo",
+        "ocio"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Auriculares Sony WH-1000XM4",
+      "description": "Cancelación de ruido, Bluetooth. Con estuche original.",
+      "price": 180,
+      "type": "sell",
+      "photo": "",
+      "owner": "usuario3",
+      "tags": [
+        "movil",
+        "ocio"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Busco coche pequeño",
+      "description": "Busco coche urbano, gasolina o híbrido. Máximo 10 años.",
+      "price": 8000,
+      "type": "buy",
+      "photo": "",
+      "owner": "usuario1",
+      "tags": [
+        "motor"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Teclado Mecánico Keychron",
+      "description": "Teclado K2 v2, switches brown. RGB. En caja.",
+      "price": 80,
+      "type": "sell",
+      "photo": "",
+      "owner": "usuario3",
+      "tags": [
+        "trabajo"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Monitor Dell 27 4K",
+      "description": "Monitor USB-C, perfecto para Mac. Sin pixeles muertos.",
+      "price": 350,
+      "type": "sell",
+      "photo": "",
+      "owner": "usuario4",
+      "tags": [
+        "trabajo"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "iPad Air 4",
+      "description": "64GB, Sky Blue. Con Apple Pencil 2.",
+      "price": 400,
+      "type": "sell",
+      "owner": "usuario1",
+      "tags": [
+        "trabajo",
+        "movil"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "testuser1768759790898",
+      "password": "$2b$10$lGoGOlzYJvZyvZO7Q6feneomapysjgvuhsbc4JK6QUXsa.VXQK3ey",
+      "id": 1
+    }
+  ]
 }

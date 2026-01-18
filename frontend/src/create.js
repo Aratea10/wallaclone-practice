@@ -24,12 +24,9 @@ async function loadAdForEdit() {
 
     try {
         const { data: ad } = await client.get(`/api/adverts/${adId}`);
+        const { data: currentUser } = await client.get("/auth/me");
 
-        const token = localStorage.getItem("auth_token");
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        const currentUsername = payload.username || payload.sub;
-
-        if (ad.owner !== currentUsername) {
+        if (ad.owner !== currentUser.username) {
             alert("No tienes permiso para editar este anuncio");
             window.location.href = "/";
             return;

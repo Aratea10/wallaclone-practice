@@ -40,10 +40,9 @@ async function renderAd(ad) {
     const token = localStorage.getItem("auth_token");
     if (token) {
         try {
-            const payload = JSON.parse(atob(token.split('.')[1]));
-            const currentUsername = payload.username || payload.sub;
+            const { data: currentUser } = await client.get("/auth/me");
 
-            if (currentUsername === ad.owner) {
+            if (currentUser.username === ad.owner) {
                 const ownerActions = document.getElementById("owner-actions");
                 ownerActions.classList.remove("hidden");
                 ownerActions.classList.add("flex");
