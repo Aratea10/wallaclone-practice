@@ -26,13 +26,13 @@ function isUserLoggedIn() {
 function renderAuthButtons() {
   if (isUserLoggedIn()) {
     authButtons.innerHTML = `
-      <button id="my-ads-btn" class="px-6 py-2 text-gray-600 hover:text-wallaclone font-semibold transition-colors mr-2">
+      <button id="my-ads-btn" class="cursor-pointer px-6 py-2 text-gray-600 hover:text-wallaclone font-semibold transition-colors mr-2">
         Mis anuncios
       </button>
       <a href="/create.html" class="px-6 py-2 text-white rounded-full font-semibold" style="background-color: #13C1AC;">
         Publicar anuncio
       </a>
-      <button id="logout-btn" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 ml-2">
+      <button id="logout-btn" class="cursor-pointer px-6 py-2 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 ml-2">
         Cerrar sesión
       </button>
     `;
@@ -82,10 +82,21 @@ function renderAds(ads) {
   adsContainer.innerHTML = ads
     .map(
       (ad) => `
-    <div class="ad-card" onclick="window.location.href='/detail.html?id=${ad.id
-        }'">
+    <div class="ad-card relative group" onclick="window.location.href='/detail.html?id=${ad.id}'">
+      ${ad.owner === currentUsername
+          ? `<button 
+            onclick="event.stopPropagation(); window.location.href='/create.html?id=${ad.id}'"
+            class="cursor-pointer absolute top-2 right-2 z-10 bg-white/90 p-2 rounded-full shadow-sm hover:text-wallaclone transition-colors"
+            title="Editar anuncio"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+          </button>`
+          : ''
+        }
       ${ad.photo
-          ? `<img src="${client.baseUrl}${ad.photo}" alt="${ad.name}" class="ad-image" />`
+          ? `<img src="${ad.photo.startsWith('http') ? ad.photo : client.baseUrl + ad.photo}" alt="${ad.name}" class="ad-image" />`
           : `<div class="ad-image flex items-center justify-center text-gray-400">Sin imagen</div>`
         }
       <div class="p-4">

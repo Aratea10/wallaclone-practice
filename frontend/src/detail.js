@@ -24,7 +24,45 @@ function showState(state) {
 async function renderAd(ad) {
     const imageContainer = document.getElementById("ad-image-container");
     if (ad.photo) {
-        imageContainer.innerHTML = `<img src="${client.baseUrl}${ad.photo}" alt="${ad.name}" class="w-full h-96 object-cover" />`;
+        const photoUrl = ad.photo.startsWith('http') ? ad.photo : `${client.baseUrl}${ad.photo}`;
+        imageContainer.innerHTML = `
+            <img src="${photoUrl}" alt="${ad.name}" class="w-full h-96 object-cover cursor-zoom-in hover:opacity-95 transition-opacity" id="ad-main-image" />
+            <div id="gallery-container" class="gap-2 mt-4 overflow-x-auto pb-2 hidden">
+            </div>
+        `;
+
+        const lightboxModal = document.getElementById("lightbox-modal");
+        const lightboxImage = document.getElementById("lightbox-image");
+        const mainImage = document.getElementById("ad-main-image");
+        const galleryContainer = document.getElementById("gallery-container");
+
+        mainImage.addEventListener("click", () => {
+            lightboxImage.src = mainImage.src;
+            lightboxModal.classList.remove("hidden");
+            lightboxModal.classList.add("flex");
+        });
+
+        lightboxModal.addEventListener("click", () => {
+            lightboxModal.classList.add("hidden");
+            lightboxModal.classList.remove("flex");
+        });
+
+        if (ad.gallery && ad.gallery.length > 1) {
+            galleryContainer.classList.remove("hidden");
+
+            ad.gallery.forEach(src => {
+                const fullSrc = src.startsWith('http') ? src : `${client.baseUrl}${src}`;
+                const thumb = document.createElement("img");
+                thumb.src = fullSrc;
+                thumb.className = "w-20 h-20 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity border-2 border-transparent hover:border-wallaclone";
+
+                thumb.addEventListener("click", () => {
+                    mainImage.src = fullSrc;
+                });
+
+                galleryContainer.appendChild(thumb);
+            });
+        }
     } else {
         imageContainer.innerHTML = `<div class="w-full h-96 bg-gray-200 flex items-center justify-center text-gray-400 text-xl">Sin imagen</div>`;
     }
@@ -47,25 +85,27 @@ async function renderAd(ad) {
                 ownerActions.classList.remove("hidden");
                 ownerActions.classList.add("flex");
 
-                document.getElementById("edit-btn").addEventListener("click", () => {
+                const editBtn = document.getElementById("edit-btn");
+                editBtn.classList.add("cursor-pointer");
+                editBtn.addEventListener("click", () => {
                     window.location.href = `/create.html?id=${ad.id}`;
                 });
 
-                document
-                    .getElementById("delete-btn")
-                    .addEventListener("click", async () => {
-                        if (
-                            confirm("¿Estás seguro de que quieres eliminar este anuncio?")
-                        ) {
-                            try {
-                                await client.delete(`/api/adverts/${ad.id}`);
-                                alert("Anuncio eliminado correctamente");
-                                window.location.href = "/";
-                            } catch (error) {
-                                alert("Error al eliminar el anuncio: " + error.message);
-                            }
+                const deleteBtn = document.getElementById("delete-btn");
+                deleteBtn.classList.add("cursor-pointer");
+                deleteBtn.addEventListener("click", async () => {
+                    if (
+                        confirm("¿Estás seguro de que quieres eliminar este anuncio?")
+                    ) {
+                        try {
+                            await client.delete(`/api/adverts/${ad.id}`);
+                            alert("Anuncio eliminado correctamente");
+                            window.location.href = "/";
+                        } catch (error) {
+                            alert("Error al eliminar el anuncio: " + error.message);
                         }
-                    });
+                    }
+                });
             }
         } catch (error) {
             console.error("Error al obtener usuario actual:", error);
