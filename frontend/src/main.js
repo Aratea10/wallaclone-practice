@@ -26,13 +26,25 @@ function isUserLoggedIn() {
 function renderAuthButtons() {
   if (isUserLoggedIn()) {
     authButtons.innerHTML = `
+      <button id="my-ads-btn" class="px-6 py-2 text-gray-600 hover:text-wallaclone font-semibold transition-colors mr-2">
+        Mis anuncios
+      </button>
       <a href="/create.html" class="px-6 py-2 text-white rounded-full font-semibold" style="background-color: #13C1AC;">
         Publicar anuncio
       </a>
-      <button id="logout-btn" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300">
+      <button id="logout-btn" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 ml-2">
         Cerrar sesión
       </button>
     `;
+
+    document.getElementById("my-ads-btn").addEventListener("click", () => {
+      if (currentUsername) {
+        activeOwner = currentUsername;
+        currentPage = 1;
+        loadAds();
+      }
+    });
+
     document.getElementById("logout-btn").addEventListener("click", () => {
       localStorage.removeItem("auth_token");
       location.reload();
@@ -113,6 +125,9 @@ async function loadAds() {
     if (activeTag) {
       query += `&q=${activeTag}`;
     }
+    if (activeOwner) {
+      query += `&owner=${activeOwner}`;
+    }
 
     const { data: ads, links } = await client.get(query);
 
@@ -170,6 +185,21 @@ async function renderDynamicTags() {
 }
 
 let debounceTimer;
+let activeOwner = null;
+let currentUsername = null;
+
+async function initUser() {
+  if (isUserLoggedIn()) {
+    try {
+      const { data: user } = await client.get("/auth/me");
+      currentUsername = user.username;
+      renderAuthButtons();
+    } catch (error) {
+      console.error("Error fetching user", error);
+    }
+  }
+}
+
 searchInput.addEventListener("input", (e) => {
   clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
@@ -219,6 +249,7 @@ document.querySelector(".logo-title").addEventListener("click", (e) => {
   searchQuery = "";
 
   activeTag = null;
+  activeOwner = null;
   const checkboxes = tagsFilterContainer.querySelectorAll(".tag-filter");
   checkboxes.forEach((cb) => (cb.checked = false));
 
@@ -232,3 +263,4 @@ document.querySelector(".logo-title").addEventListener("click", (e) => {
 renderAuthButtons();
 renderDynamicTags();
 loadAds();
+initUser();
