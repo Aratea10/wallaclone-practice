@@ -78,21 +78,44 @@ function showState(state) {
   }
 }
 
+window.deleteAd = async (adId) => {
+  if (!confirm("¿Estás seguro de que quieres eliminar este anuncio?")) return;
+
+  try {
+    await client.delete(`/api/adverts/${adId}`);
+    loadAds();
+  } catch (error) {
+    console.error("Error deleting ad", error);
+    alert("Error al eliminar el anuncio");
+  }
+};
+
 function renderAds(ads) {
   adsContainer.innerHTML = ads
     .map(
       (ad) => `
     <div class="ad-card relative group" onclick="window.location.href='/detail.html?id=${ad.id}'">
       ${ad.owner === currentUsername
-          ? `<button 
-            onclick="event.stopPropagation(); window.location.href='/create.html?id=${ad.id}'"
-            class="cursor-pointer absolute top-2 right-2 z-10 bg-white/90 p-2 rounded-full shadow-sm hover:text-wallaclone transition-colors"
-            title="Editar anuncio"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-            </svg>
-          </button>`
+          ? `<div class="absolute top-2 right-2 z-10 flex gap-2">
+              <button 
+                onclick="event.stopPropagation(); window.location.href='/create.html?id=${ad.id}'"
+                class="cursor-pointer bg-white/90 p-2 rounded-full shadow-sm hover:text-wallaclone transition-colors"
+                title="Editar anuncio"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </button>
+              <button 
+                onclick="event.stopPropagation(); deleteAd(${ad.id})"
+                class="cursor-pointer bg-white/90 p-2 rounded-full shadow-sm text-red-500 hover:bg-red-50 transition-colors"
+                title="Eliminar anuncio"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>`
           : ''
         }
       ${ad.photo
@@ -283,7 +306,9 @@ document.querySelector(".logo-title").addEventListener("click", (e) => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-renderAuthButtons();
-renderDynamicTags();
-loadAds();
-initUser();
+(async function init() {
+  renderAuthButtons();
+  await initUser();
+  renderDynamicTags();
+  loadAds();
+})();
