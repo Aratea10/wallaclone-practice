@@ -106,32 +106,40 @@
 
                 <div>
                     <label class="block text-gray-700 text-sm font-medium mb-2 pl-1">Tags (Opcional)</label>
-                    <div class="flex flex-wrap gap-3">
+                    <div class="flex gap-2 mb-3">
+                        <input type="text" id="new-tag-input" placeholder="Nuevo tag..."
+                            class="flex-1 px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-wallaclone focus:border-transparent outline-none transition-all text-sm" />
+                        <button type="button" id="add-tag-btn"
+                            class="px-4 py-2 bg-gray-800 text-white rounded-xl hover:bg-gray-700 transition-colors text-sm font-medium">
+                            Añadir
+                        </button>
+                    </div>
+                    <div id="tags-container" class="flex flex-wrap gap-3">
                         <label class="cursor-pointer">
                             <input type="checkbox" name="tags" value="trabajo" class="peer sr-only">
                             <span
-                                class="px-4 py-2 rounded-full border border-gray-200 text-gray-600 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-800 transition-all text-sm">
+                                class="px-4 py-2 rounded-full border border-gray-200 text-gray-600 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-800 transition-all text-sm select-none">
                                 Trabajo
                             </span>
                         </label>
                         <label class="cursor-pointer">
                             <input type="checkbox" name="tags" value="movil" class="peer sr-only">
                             <span
-                                class="px-4 py-2 rounded-full border border-gray-200 text-gray-600 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-800 transition-all text-sm">
+                                class="px-4 py-2 rounded-full border border-gray-200 text-gray-600 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-800 transition-all text-sm select-none">
                                 Móvil
                             </span>
                         </label>
                         <label class="cursor-pointer">
                             <input type="checkbox" name="tags" value="motor" class="peer sr-only">
                             <span
-                                class="px-4 py-2 rounded-full border border-gray-200 text-gray-600 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-800 transition-all text-sm">
+                                class="px-4 py-2 rounded-full border border-gray-200 text-gray-600 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-800 transition-all text-sm select-none">
                                 Motor
                             </span>
                         </label>
                         <label class="cursor-pointer">
                             <input type="checkbox" name="tags" value="ocio" class="peer sr-only">
                             <span
-                                class="px-4 py-2 rounded-full border border-gray-200 text-gray-600 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-800 transition-all text-sm">
+                                class="px-4 py-2 rounded-full border border-gray-200 text-gray-600 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-800 transition-all text-sm select-none">
                                 Ocio
                             </span>
                         </label>

@@ -49,7 +49,11 @@ async function loadAdForEdit() {
                 const tagCheckbox = document.querySelector(
                     `input[name="tags"][value="${tag}"]`
                 );
-                if (tagCheckbox) tagCheckbox.checked = true;
+                if (tagCheckbox) {
+                    tagCheckbox.checked = true;
+                } else {
+                    createTagCheckbox(tag);
+                }
             });
         }
 
@@ -179,6 +183,43 @@ form.addEventListener("submit", async (e) => {
         errorMessage.classList.remove("hidden");
         submitButton.disabled = false;
         submitButton.textContent = adId ? "Guardar cambios" : "Publicar anuncio";
+    }
+});
+
+const newTagInput = document.getElementById("new-tag-input");
+const addTagBtn = document.getElementById("add-tag-btn");
+const tagsContainer = document.getElementById("tags-container");
+
+function createTagCheckbox(tagName) {
+    const existing = document.querySelector(`input[name="tags"][value="${tagName}"]`);
+    if (existing) {
+        existing.checked = true;
+        return;
+    }
+
+    const label = document.createElement("label");
+    label.className = "cursor-pointer";
+    label.innerHTML = `
+        <input type="checkbox" name="tags" value="${tagName}" checked class="peer sr-only">
+        <span class="px-4 py-2 rounded-full border border-gray-200 text-gray-600 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-800 transition-all text-sm select-none">
+            ${tagName.charAt(0).toUpperCase() + tagName.slice(1)}
+        </span>
+    `;
+    tagsContainer.appendChild(label);
+}
+
+addTagBtn.addEventListener("click", () => {
+    const tagName = newTagInput.value.trim().toLowerCase();
+    if (tagName) {
+        createTagCheckbox(tagName);
+        newTagInput.value = "";
+    }
+});
+
+newTagInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        addTagBtn.click();
     }
 });
 

@@ -10,7 +10,7 @@ const authButtons = document.getElementById("auth-buttons");
 let currentPage = 1;
 const limit = 10;
 let searchQuery = "";
-let activeTag = null;
+let activeTags = new Set();
 
 const searchInput = document.getElementById("search-input");
 const tagsFilterContainer = document.getElementById("tags-filter");
@@ -130,31 +130,47 @@ async function loadAds() {
   showState("loading");
 
   try {
-    let query = `/api/adverts?_page=${currentPage}&_limit=${limit}`;
-    if (searchQuery) {
-      query += `&name_like=${searchQuery}`;
-    }
-    if (activeTag) {
-      query += `&q=${activeTag}`;
-    }
+    const { data: allAds } = await client.get("/api/adverts");
+    let filteredAds = allAds;
+
     if (activeOwner) {
-      query += `&owner=${activeOwner}`;
+      filteredAds = filteredAds.filter(ad => ad.owner === activeOwner);
     }
 
-    const { data: ads, links } = await client.get(query);
+    if (activeTags.size > 0) {
+      filteredAds = filteredAds.filter((ad) =>
+        ad.tags && ad.tags.some(tag => activeTags.has(tag))
+      );
+    }
 
-    if (ads.length === 0 && currentPage === 1) {
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filteredAds = filteredAds.filter((ad) =>
+        ad.name.toLowerCase().includes(query) ||
+        ad.description.toLowerCase().includes(query) ||
+        (ad.tags && ad.tags.some(t => t.toLowerCase().includes(query)))
+      );
+    }
+
+    const totalAds = filteredAds.length;
+    const totalPages = Math.ceil(totalAds / limit) || 1;
+
+    const start = (currentPage - 1) * limit;
+    const end = start + limit;
+    const paginatedAds = filteredAds.slice(start, end);
+
+    if (paginatedAds.length === 0 && filteredAds.length === 0) {
       showState("empty");
       paginationContainer.classList.add("hidden");
     } else {
-      renderAds(ads);
+      renderAds(paginatedAds);
       showState("success");
 
-      currentPageSpan.textContent = `Página ${currentPage}`;
-      prevPageBtn.disabled = !links.prev;
-      nextPageBtn.disabled = !links.next;
+      currentPageSpan.textContent = `Página ${currentPage} de ${totalPages}`;
+      prevPageBtn.disabled = currentPage <= 1;
+      nextPageBtn.disabled = currentPage >= totalPages;
 
-      if (ads.length === 0 && currentPage > 1) {
+      if (paginatedAds.length === 0 && currentPage > 1) {
         currentPage--;
         loadAds();
       }
@@ -223,15 +239,10 @@ searchInput.addEventListener("input", (e) => {
 
 tagsFilterContainer.addEventListener("change", (e) => {
   if (e.target.classList.contains("tag-filter")) {
-    const checkboxes = tagsFilterContainer.querySelectorAll(".tag-filter");
-    checkboxes.forEach((cb) => {
-      if (cb !== e.target) cb.checked = false;
-    });
-
     if (e.target.checked) {
-      activeTag = e.target.value;
+      activeTags.add(e.target.value);
     } else {
-      activeTag = null;
+      activeTags.delete(e.target.value);
     }
     currentPage = 1;
     loadAds();
@@ -260,7 +271,7 @@ document.querySelector(".logo-title").addEventListener("click", (e) => {
   searchInput.value = "";
   searchQuery = "";
 
-  activeTag = null;
+  activeTags.clear();
   activeOwner = null;
   const checkboxes = tagsFilterContainer.querySelectorAll(".tag-filter");
   checkboxes.forEach((cb) => (cb.checked = false));
