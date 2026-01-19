@@ -75,6 +75,8 @@ async function renderAd(ad) {
     typeBadge.className = ad.type === "sell" ? "badge-sell" : "badge-buy";
     typeBadge.textContent = ad.type === "sell" ? "Venta" : "Compra";
 
+    document.getElementById("ad-owner").textContent = `Subido por: ${ad.owner || 'Anónimo'}`;
+
     const token = localStorage.getItem("auth_token");
     if (token) {
         try {

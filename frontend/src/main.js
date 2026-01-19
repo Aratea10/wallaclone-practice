@@ -108,6 +108,7 @@ function renderAds(ads) {
           </span>
         </div>
         <p class="text-gray-600 text-sm line-clamp-2 mb-3">${ad.description}</p>
+        <p class="text-xs text-gray-400 mb-3">Subido por: <span class="font-medium text-gray-600">${ad.owner || 'Anónimo'}</span></p>
         <p class="text-2xl font-bold" style="color: #13C1AC;">${ad.price}€</p>
         ${ad.tags
           ? `<div class="mt-2 flex gap-1 flex-wrap">${ad.tags
