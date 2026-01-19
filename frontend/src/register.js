@@ -19,19 +19,23 @@ form.addEventListener("submit", async (e) => {
     }
 
     submitButton.disabled = true;
-    submitButton.textContent = "Registrando...";
+    submitButton.textContent = "Creando cuenta...";
     errorMessage.classList.add("hidden");
     successMessage.classList.add("hidden");
 
     try {
         await client.post("/auth/register", { username, password });
 
-        successMessage.textContent = "¡Registrado correctamente! Redirigiendo a inicio de sesión...";
+        const { data } = await client.post("/auth/login", { username, password });
+
+        localStorage.setItem("auth_token", data.accessToken);
+
+        successMessage.textContent = "¡Cuenta creada! Entrando...";
         successMessage.classList.remove("hidden");
 
         setTimeout(() => {
-            window.location.href = "/login.html";
-        }, 2000);
+            window.location.href = "/";
+        }, 1500);
     } catch (error) {
         errorMessage.textContent = error.message || "Error al registrarse";
         errorMessage.classList.remove("hidden");
