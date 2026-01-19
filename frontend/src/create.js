@@ -167,12 +167,12 @@ form.addEventListener("submit", async (e) => {
         if (adId) {
             await client.put(`/api/adverts/${adId}`, adData);
             alert("¡Anuncio actualizado correctamente!");
+            window.location.href = `/detail.html?id=${adId}`;
         } else {
-            await client.post("/api/adverts", adData);
+            const { data: newAd } = await client.post("/api/adverts", adData);
             alert("¡Anuncio publicado correctamente!");
+            window.location.href = `/detail.html?id=${newAd.id}`;
         }
-
-        window.location.href = "/";
     } catch (error) {
         console.error(error);
         errorMessage.textContent = error.message || "Error al guardar el anuncio";
