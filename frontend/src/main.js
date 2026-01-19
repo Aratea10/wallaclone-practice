@@ -119,8 +119,15 @@ function renderAds(ads) {
           : ''
         }
       ${ad.photo
-          ? `<img src="${ad.photo.startsWith('http') ? ad.photo : client.baseUrl + ad.photo}" alt="${ad.name}" class="ad-image" />`
-          : `<div class="ad-image flex items-center justify-center text-gray-400">Sin imagen</div>`
+          ? `<div class="w-full h-48 bg-gray-50 flex items-center justify-center overflow-hidden">
+              <img 
+                src="${ad.photo.startsWith('http') ? ad.photo : client.baseUrl + ad.photo}" 
+                alt="${ad.name}" 
+                class="w-full h-full object-contain p-2 hover:scale-105 transition-transform duration-300 will-change-transform" 
+                style="backface-visibility: hidden;"
+              />
+            </div>`
+          : `<div class="ad-image flex items-center justify-center text-gray-400 bg-gray-100">Sin imagen</div>`
         }
       <div class="p-4">
         <div class="flex justify-between items-start mb-2">
