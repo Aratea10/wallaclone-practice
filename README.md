@@ -88,7 +88,6 @@ La aplicación frontend estará disponible en `http://localhost:5173` (o en el p
 ## 📁 Estructura del Proyecto
 
 ```
-.
 ├── backend/       # Contiene el servidor de la API y la base de datos
 │   ├── db.json    # Base de datos simulada con los anuncios y usuarios
 │   └── ...
