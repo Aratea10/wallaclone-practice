@@ -2,7 +2,7 @@ import { client } from "./client.js";
 
 if (!localStorage.getItem("auth_token")) {
     alert("Debes iniciar sesión para publicar un anuncio");
-    window.location.href = "/login.html";
+    window.location.href = "/";
 }
 
 const form = document.getElementById("create-form");
